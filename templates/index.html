@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HairHaven</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-dark: #020617;
+            --gold-leaf: #d4af37;
+            --gold-glow: #f9e29d;
+            --text-light: #f8fafc;
+            --accent-blue: #1e293b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--primary-dark);
+            color: var(--text-light);
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Advanced Background Mesh Gradient */
+        .bg-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(225,39%,30%,0.3) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(339,49%,30%,0.3) 0, transparent 50%);
+            filter: blur(80px);
+        }
+
+        /* Custom Royal Cursor */
+        #cursor {
+            width: 20px;
+            height: 20px;
+            background: var(--gold-leaf);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.15s ease-out;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Header */
+        .header {
+            padding: 30px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            letter-spacing: 2px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .brand span {
+            color: var(--gold-leaf);
+            font-style: italic;
+        }
+
+        /* Hero Content */
+        .hero {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Glassmorphism Card - Animation Removed */
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 60px 40px;
+            border-radius: 40px;
+            max-width: 650px;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            /* Removed animation: float here */
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 5vw, 52px);
+            margin-bottom: 24px;
+            background: linear-gradient(to right, #ffffff, var(--gold-glow), #ffffff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            animation: shineText 5s linear infinite;
+        }
+
+        @keyframes shineText {
+            to { background-position: 200% center; }
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #94a3b8;
+            margin-bottom: 40px;
+            font-weight: 300;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            position: relative;
+            display: inline-block;
+            padding: 20px 50px;
+            background: var(--gold-leaf);
+            color: var(--primary-dark);
+            text-decoration: none;
+            border-radius: 100px;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn:hover {
+            transform: scale(1.05) translateY(-3px);
+            background: #ffffff;
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.15);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--gold-leaf);
+            color: var(--gold-leaf);
+            border-radius: 100px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .header { padding: 20px; }
+            .card { padding: 40px 25px; margin: 15px; }
+            .brand { font-size: 24px; }
+            #cursor { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="cursor"></div>
+    <div class="bg-mesh"></div>
+
+    <header class="header">
+        <div class="brand">Hair<span>Haven</span></div>
+    </header>
+
+    <main class="hero">
+        <section class="card">
+            <div class="badge">Molecular Diagnostics</div>
+            <h1>The Art of Personalized Care</h1>
+            <p>
+                Unlock the secrets of your hair’s unique biology. 
+                Our bespoke analysis provides a scientifically-backed 
+                ritual designed exclusively for your lifestyle.
+            </p>
+            <a href="/questions" class="btn">Begin Analysis</a>
+        </section>
+    </main>
+
+    <script>
+        const cursor = document.getElementById('cursor');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        const activeElements = document.querySelectorAll('.btn, .brand, .badge');
+        activeElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(4)';
+                cursor.style.background = 'rgba(212, 175, 55, 0.2)';
+                cursor.style.border = '1px solid #d4af37';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursor.style.background = '#d4af37';
+                cursor.style.border = 'none';
+            });
+        });
+    </script>
+</body>
+</html>

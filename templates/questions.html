@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HairHaven | Premium Hair Analysis</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- Added for icons -->
+
+    <style>
+        :root {
+            --primary-dark: #020617;
+            --gold-leaf: #d4af37;
+            --gold-glow: #f9e29d;
+            --text-light: #f8fafc;
+            --accent-blue: #1e293b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--primary-dark);
+            color: var(--text-light);
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Advanced Background Mesh Gradient */
+        .bg-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(225,39%,30%,0.3) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(339,49%,30%,0.3) 0, transparent 50%);
+            filter: blur(80px);
+        }
+
+        /* Custom Royal Cursor */
+        #cursor {
+            width: 20px;
+            height: 20px;
+            background: var(--gold-leaf);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.15s ease-out;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Header */
+        .header {
+            padding: 30px 60px;
+            display: flex;
+            justify-content: flex-start; /* Changed to left-align the brand */
+            align-items: center;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            letter-spacing: 2px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .brand span {
+            color: var(--gold-leaf);
+            font-style: italic;
+        }
+
+        /* Container & Card */
+        .container {
+            max-width: 650px;
+            margin: 60px auto;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 60px 40px;
+            border-radius: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            position: relative;
+            overflow: hidden;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            margin-bottom: 40px;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--gold-leaf), var(--gold-glow));
+            width: 16.6%;
+            transition: width 0.8s ease;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(24px, 4vw, 32px);
+            margin-bottom: 30px;
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        /* Question */
+        .question {
+            display: none;
+        }
+
+        .question.active {
+            display: block;
+        }
+
+        /* Royal Options */
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 18px 25px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.02);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 400;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option:hover {
+            border-color: var(--gold-leaf);
+            background: rgba(212, 175, 55, 0.05);
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .option input[type="radio"] {
+            accent-color: var(--gold-leaf);
+            width: 18px;
+            height: 18px;
+            margin-right: 15px;
+        }
+
+        .option.selected {
+            border-color: var(--gold-leaf);
+            background: rgba(212, 175, 55, 0.1);
+            font-weight: 600;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .nav-btn {
+            padding: 15px 30px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--text-light);
+        }
+
+        .nav-btn:hover {
+            border-color: var(--gold-leaf);
+            background: rgba(212, 175, 55, 0.05);
+            transform: scale(1.05);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Sub-text */
+        .footer-note {
+            text-align: center;
+            font-size: 12px;
+            color: #94a3b8;
+            margin-top: 20px;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .header { padding: 20px; }
+            .container { padding: 40px 25px; margin: 15px; }
+            .brand { font-size: 24px; }
+            .nav-buttons { flex-direction: column; gap: 15px; }
+            .nav-btn { width: 100%; }
+            #cursor { display: none; } /* Hide custom cursor on touch devices */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="cursor"></div>
+    <div class="bg-mesh"></div>
+
+    <header class="header">
+        <div class="brand">Hair<span>Haven</span></div>
+    </header>
+
+    <div class="container">
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <form id="quiz-form">
+            <div class="question active">
+                <h2>Select Your Gender</h2>
+                <label class="option"><input type="radio" name="gender" value="female"> Female</label>
+                <label class="option"><input type="radio" name="gender" value="male"> Male</label>
+            </div>
+
+            <div class="question">
+                <h2>Select Your Age Group</h2>
+                <label class="option"><input type="radio" name="age" value="under18"> Under 18</label>
+                <label class="option"><input type="radio" name="age" value="18-25"> 18 – 25</label>
+                <label class="option"><input type="radio" name="age" value="26-35"> 26 – 35</label>
+                <label class="option"><input type="radio" name="age" value="36plus"> 36+</label>
+            </div>
+
+            <div class="question">
+                <h2>What Is Your Hair Type?</h2>
+                <label class="option"><input type="radio" name="hair_type" value="straight"> Straight</label>
+                <label class="option"><input type="radio" name="hair_type" value="wavy"> Wavy</label>
+                <label class="option"><input type="radio" name="hair_type" value="curly"> Curly</label>
+            </div>
+
+            <div class="question">
+                <h2>Describe Your Scalp</h2>
+                <label class="option"><input type="radio" name="scalp" value="oily"> Oily</label>
+                <label class="option"><input type="radio" name="scalp" value="dry"> Dry</label>
+                <label class="option"><input type="radio" name="scalp" value="normal"> Normal</label>
+                <label class="option"><input type="radio" name="scalp" value="sensitive"> Sensitive</label>
+            </div>
+
+            <div class="question">
+                <h2>Scalp Sensitivity</h2>
+                <label class="option"><input type="radio" name="itch" value="often"> Often Itchy</label>
+                <label class="option"><input type="radio" name="itch" value="sometimes"> Sometimes</label>
+                <label class="option"><input type="radio" name="itch" value="rarely"> Rarely</label>
+                <label class="option"><input type="radio" name="itch" value="never"> Never</label>
+            </div>
+
+            <div class="question">
+                <h2>What is your primary goal?</h2>
+                <label class="option"><input type="radio" name="goal" value="growth"> Maximum Growth</label>
+                <label class="option"><input type="radio" name="goal" value="strength"> Internal Strength</label>
+                <label class="option"><input type="radio" name="goal" value="smoothness"> Silky Smoothness</label>
+                <label class="option"><input type="radio" name="goal" value="volume"> Lush Volume</label>
+            </div>
+        </form>
+
+        <div class="nav-buttons">
+            <button type="button" class="nav-btn" id="back-btn" disabled>← Back</button>
+        </div>
+
+        <p class="footer-note">Your data is processed with medical-grade privacy.</p>
+    </div>
+
+    <script>
+        // Smooth Cursor Movement
+        const cursor = document.getElementById('cursor');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Hover Interactions
+        const activeElements = document.querySelectorAll('.option, .brand, .nav-btn');
+        activeElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(4)';
+                cursor.style.background = 'rgba(212, 175, 55, 0.2)';
+                cursor.style.border = '1px solid #d4af37';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursor.style.background = '#d4af37';
+                cursor.style.border = 'none';
+            });
+        });
+
+        let q = 0;
+        const questions = document.querySelectorAll(".question");
+        const progressBar = document.getElementById("progress-bar");
+        const backBtn = document.getElementById("back-btn");
+
+        function updateUI() {
+            // Update progress bar
+            const percent = ((q + 1) / questions.length) * 100;
+            progressBar.style.width = percent + "%";
+
+            // Enable/disable back button
+            backBtn.disabled = q === 0;
+            backBtn.style.opacity = q === 0 ? 0.5 : 1;
+        }
+
+        function next() {
+            const current = questions[q];
+            const selected = current.querySelector("input[type='radio']:checked");
+
+            if (!selected) {
+                return; // No selection, do nothing
+            }
+
+            localStorage.setItem(selected.name, selected.value);
+
+            current.classList.remove("active");
+            q++;
+
+            if (q < questions.length) {
+                questions[q].classList.add("active");
+                updateUI();
+            } else {
+                // Elegant redirection
+                document.querySelector(".container").innerHTML = "<h2 style='text-align:center'>Analyzing your hair profile...</h2>";
+                setTimeout(() => {
+                    window.location.href = "/result";
+                }, 1500);
+            }
+        }
+
+        function back() {
+            if (q > 0) {
+                questions[q].classList.remove("active");
+                q--;
+                questions[q].classList.add("active");
+                updateUI();
+            }
+        }
+
+        // Event listener for back button
+        backBtn.addEventListener('click', back);
+
+        // Auto-advance on selection
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                // Add selected class to the parent option
+                const parent = radio.closest('.option');
+                parent.closest('.question').querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+                parent.classList.add('selected');
+                // Auto-advance after a short delay for visual feedback
+                setTimeout(next, 500);
+            });
+        });
+
+        // Visual feedback for clicking the whole row
+        document.querySelectorAll('.option').forEach(item => {
+            item.addEventListener('click', function() {
+                const radio = this.querySelector('input[type="radio"]');
+                if (radio) {
+                    radio.checked = true;
+                    radio.dispatchEvent(new Event('change'));
+                }
+            });
+        });
+
+        // Initialize UI
+        updateUI();
+    </script>
+
+</body>
+</html>

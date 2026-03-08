@@ -1,0 +1,125 @@
+/* --------- GLOBAL RESET & PREMIUM BACKGROUND --------- */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #020617; /* Deep Midnight for consistency */
+    color: #f8fafc;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+/* Background Mesh for depth */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(at 0% 100%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(225,39%,30%,0.3) 0, transparent 50%);
+    z-index: -1;
+}
+
+/* --------- HEADER BRAND (Royal Positioning) --------- */
+.header {
+    position: fixed;
+    top: 30px;
+    right: 40px;
+    font-size: 28px;
+    font-weight: bold;
+    z-index: 1000;
+    letter-spacing: 1px;
+}
+
+.header .h {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: #d4af37; /* Gold Leaf */
+    font-size: 38px;
+}
+
+.header .rest {
+    font-family: 'Playfair Display', serif;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 22px;
+}
+
+/* --------- SURVEY CONTAINER (Glassmorphism) --------- */
+.container {
+    width: 90%;
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 50px 40px;
+    margin: 40px auto;
+    border-radius: 30px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+/* --------- TYPOGRAPHY --------- */
+h2, .question-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    margin-bottom: 25px;
+    color: #fff;
+}
+
+/* --------- PREMIUM BUTTONS --------- */
+button {
+    background: #d4af37; /* Gold Leaf */
+    color: #0f172a; /* Dark Navy */
+    padding: 16px 20px;
+    border: none;
+    margin-top: 25px;
+    width: 100%;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+}
+
+button:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
+}
+
+/* Input Styling (If you have text inputs or selects) */
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    color: white;
+}
+
+/* --------- ADVANCED ANIMATIONS --------- */
+.question {
+    display: none;
+}
+
+.question.active {
+    display: block;
+    animation: slideUpFade 0.6s ease-out;
+}
+
+@keyframes slideUpFade {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}

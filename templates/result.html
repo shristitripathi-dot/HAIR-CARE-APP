@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HairHaven | Your Royal Prescription</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- Added for icons -->
+
+    <style>
+        :root {
+            --electric-blue: #00BCD4; /* Changed from royal-gold for a cool vibe */
+            --indigo-deep: #3F51B5; /* Changed from deep-emerald */
+            --soft-blue: #E3F2FD; /* Changed from soft-gold */
+            --text-dark: #1a1a1a;
+            --white: #ffffff;
+            --vibrant-purple: #9C27B0; /* Added for energy */
+            --cool-cyan: #00E5FF; /* Added for cool effects */
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #020617; /* Updated to the specified dark blue-black color */
+            color: var(--white);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Royal Header with Energy */
+        .header {
+            width: 100%;
+            padding: 25px 0;
+            text-align: center;
+            background: rgba(63, 81, 181, 0.9); /* Updated to indigo */
+            border-bottom: 2px solid var(--electric-blue);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            animation: bounceIn 1s ease-out;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 38px;
+            letter-spacing: 2px;
+            color: var(--electric-blue);
+            text-transform: uppercase;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 5px var(--electric-blue); }
+            to { text-shadow: 0 0 20px var(--electric-blue), 0 0 30px var(--electric-blue); }
+        }
+
+        .brand span {
+            font-style: italic;
+            color: var(--white);
+        }
+
+        /* Premium Container with Vibrancy */
+        .container {
+            max-width: 850px;
+            margin: 60px auto;
+            background: var(--white);
+            color: var(--text-dark);
+            padding: 50px;
+            border-radius: 10px; /* Slightly rounded for energy */
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(0, 188, 212, 0.2); /* Updated shadow */
+            position: relative;
+            overflow: hidden;
+            animation: slideUp 1s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Blue Border Accent with Pulse */
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 2px solid var(--electric-blue);
+            animation: pulse 3s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 188, 212, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 188, 212, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 188, 212, 0); }
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: var(--indigo-deep);
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .summary {
+            text-align: center;
+            font-style: italic;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+            animation: fadeIn 2s ease-out;
+        }
+
+        /* Section Styling with Energy */
+        .section {
+            margin-bottom: 45px;
+            animation: fadeIn 1s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .section:nth-child(1) { animation-delay: 0.5s; }
+        .section:nth-child(2) { animation-delay: 1s; }
+        .section:nth-child(3) { animation-delay: 1.5s; }
+
+        .section h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--indigo-deep);
+            font-size: 22px;
+            border-left: 4px solid var(--electric-blue);
+            padding-left: 15px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section h3::before {
+            content: "✨";
+            margin-right: 10px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        ul li:hover {
+            transform: translateX(10px);
+            color: var(--vibrant-purple);
+        }
+
+        ul li::before {
+            content: "✦";
+            color: var(--electric-blue);
+            margin-right: 15px;
+            font-size: 18px;
+            animation: twinkle 1.5s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Luxury Product Cards with Cool Effects */
+        .product {
+            background: linear-gradient(135deg, #f9f9f9 0%, #e8f5e8 100%);
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid #eee;
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product::before {
+            content: "";
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 188, 212, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .product:hover::before {
+            left: 100%;
+        }
+
+        .product:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 0 20px rgba(0, 188, 212, 0.3);
+            border-color: var(--electric-blue);
+        }
+
+        .product-info h4 {
+            margin: 0 0 5px 0;
+            font-size: 20px;
+            font-family: 'Playfair Display', serif;
+            color: var(--indigo-deep);
+        }
+
+        .sites {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .site {
+            background: var(--soft-blue);
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .site-price {
+            font-weight: bold;
+            color: var(--indigo-deep);
+        }
+
+        .site-name {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* The "Shop Now" Button with Energy */
+        .shop-now-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--indigo-deep), var(--vibrant-purple));
+            color: var(--electric-blue);
+            padding: 8px 15px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid var(--electric-blue);
+            transition: 0.3s;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .shop-now-btn::before {
+            content: "";
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .shop-now-btn:hover::before {
+            left: 100%;
+        }
+
+        .shop-now-btn:hover {
+            background: linear-gradient(45deg, var(--electric-blue), var(--cool-cyan));
+            color: var(--indigo-deep);
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--soft-blue);
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: fadeIn 3s ease-out;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 600px) {
+            .container { margin: 20px; padding: 25px; }
+            .sites { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="brand">HAIR<span>HAVEN</span></div>
+</div>
+
+<div class="container">
+    <h2>The Royal Analysis</h2>
+    <p class="summary">
+        Your bespoke hair profile has been curated with electrifying precision! We've unlocked the secrets to unleash your hair's full potential, blending luxury rituals and powerhouse formulations for a transformation that's nothing short of majestic.
+    </p>
+
+    <div class="section">
+        <h3>Hair Profile</h3>
+        <ul id="hair-condition"></ul>
+    </div>
+
+    <div class="section">
+        <h3>The Ritual (Recommendations)</h3>
+        <ul id="recommendations"></ul>
+    </div>
+
+    <div class="section">
+        <h3>Curated Formulations</h3>
+        <div id="products"></div>
+    </div>
+</div>
+
+<footer>
+    &copy; 2026 HairHaven | Excellence in Hair Care
+</footer>
+
+<script>
+    const answers = {
+        gender: localStorage.getItem('gender') || 'not specified',
+        hair_type: localStorage.getItem('hair_type') || 'straight',
+        scalp: localStorage.getItem('scalp') || 'normal',
+        itch: localStorage.getItem('itch') || 'no',
+        goal: localStorage.getItem('goal') || 'growth'
+    };
+
+    const conditionList = document.getElementById('hair-condition');
+    const recommendationList = document.getElementById('recommendations');
+    const productsDiv = document.getElementById('products');
+
+    let conditions = [];
+    if (answers.hair_type === 'curly') conditions.push('Premium Curls / Textured Strands');
+    if (answers.hair_type === 'straight') conditions.push('Sleek Straight Profile');
+    if (answers.scalp === 'dry') conditions.push('High-Hydration Needed (Dry Scalp)');
+    if (answers.scalp === 'oily') conditions.push('Balance Required (Oily Scalp)');
+    if (conditions.length === 0) conditions.push('Optimal Natural Balance');
+
+    conditions.forEach(c => {
+        const li = document.createElement('li');
+        li.textContent = c;
+        conditionList.appendChild(li);
+    });
+
+    let recs = [];
+    if (answers.goal === 'growth') {
+        recs.push('Weekly Crown Massage with cold-pressed oils for explosive growth!');
+        recs.push('Protein-rich infusion masks (Egg/Curd rituals) to fuel your follicles.');
+    } else if (answers.goal === 'strength') {
+        recs.push('Vitamin E fortification treatments to supercharge strength.');
+        recs.push('Shield hair from thermal stressors (Heat styling) like a boss.');
+    } else {
+        recs.push('Deep silk-conditioning every 7 days for silky smoothness.');
+        recs.push('Aloe-vera hydration therapy to quench thirsty strands.');
+    }
+
+    recs.forEach(r => {
+        const li = document.createElement('li');
+        li.textContent = r;
+        recommendationList.appendChild(li);
+    });
+
+    let products = [];
+
+    products.push({
+        name: 'Onion Growth Elixir (Mamaearth Onion Hair Oil with Redensyl)',
+        brand: 'Mamaearth',
+        sites: [
+            {
+                name: 'Amazon',
+                mrp: 599,
+                price: 478,
+                link: 'https://www.amazon.in/dp/B0CGTZ7CW9'
+            },
+            {
+                name: 'Nykaa',
+                mrp: 599,
+                price: 424,
+                link: 'https://www.nykaa.com/mamaearth-onion-redensyl-hair-oil-for-hair-fall-control-hair-regrowth/p/3985406'
+            },
+            {
+                name: 'Official Site',
+                mrp: 599,
+                price: 533,
+                link: 'https://mamaearth.in/product/onion-hair-oil-for-hair-regrowth-hair-fall-control-with-redensyl-250ml'
+            }
+        ]
+    });
+
+    products.push({
+        name: 'Smooth Intense Silk Shampoo (L’Oréal Paris Total Repair 5)',
+        brand: "L'Oreal Paris",
+        sites: [
+            {
+                name: 'Nykaa',
+                mrp: 599,
+                price: 415,
+                link: 'https://www.nykaa.com/l-oreal-paris-total-repair-5-shampoo-4624/p/4624'
+            },
+            {
+                name: 'Amazon',
+                mrp: 849,
+                price: 522,
+                link: 'https://www.amazon.in/LOreal-Paris-Shampoo-Repairing-Damaged/dp/B0F8R6FHYX'
+            }
+        ]
+    });
+
+    products.forEach(p => {
+        p.sites.sort((a, b) => a.price - b.price);
+        const cheapest = p.sites[0];
+
+        const div = document.createElement('div');
+        div.className = 'product';
+
+        let sitesHtml = '<div class="sites">';
+        p.sites.forEach((site, index) => {
+            const discount = Math.round(((site.mrp - site.price) / site.mrp) * 100);
+            sitesHtml += `
+                <div class="site" style="${index === 0 ? 'border:2px solid #00BCD4' : ''}">
+                    <div class="site-name">${site.name}</div>
+                    <div class="site-price">
+                        <span style="text-decoration:line-through;color:#999;">₹${site.mrp}</span>
+                        <strong style="margin-left:8px;">₹${site.price}</strong>
+                    </div>
+                    <div style="color:green;font-size:13px;">${discount}% OFF</div>
+                    <a href="${site.link}" target="_blank" class="shop-now-btn">
+                        Shop Now <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            `;
+        });
+        sitesHtml += '</div>';
+
+        div.innerHTML = `
+            <div class="product-info">
+                <h4>${p.name}</h4>
+                <small style="color:#00BCD4">
+                    Best Price: ₹${cheapest.price} on ${cheapest.name}
+                </small>
+            </div>
+            ${sitesHtml}
+        `;
+        productsDiv.appendChild(div);
+    });
+</script>
